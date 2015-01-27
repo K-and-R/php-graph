@@ -1,6 +1,7 @@
 <?php
-include('../phpgraphlib.php');
-$graph = new PHPGraphLib(520,280);
+use Atompulse\Graph\Graph;
+
+$graph = new Graph(520,280);
 $data = array("Alpha" => 1145, "Beta" => 1202, "Cappa" => 1523, 
 	"Delta" => 1437, "Echo" => 949, "Falcon" => 999, "Gamma" => 1188);
 $data2 = array("Alpha" => 898, "Beta" => 1498, "Cappa" => 1343, 

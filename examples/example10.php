@@ -1,7 +1,7 @@
 <?php
-include('../phpgraphlib.php');
-include('../phpgraphlib_stacked.php');
-$graph = new PHPGraphLibStacked(500, 300);
+use Atompulse\Graph\GraphStacked;
+
+$graph = new GraphStacked(500, 300);
 $popularity = array('Windows 7' => 80, 'Mac OS 10' => 35, 'Fedora' => 9);
 $cost = array('Windows 7' => 10, 'Mac OS 10' => 30, 'Fedora' => 90);
 $speed = array('Windows 7' => 50, 'Mac OS 10' => 50, 'Fedora' => 80);

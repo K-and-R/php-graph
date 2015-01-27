@@ -1,11 +1,11 @@
 {
-    "name": "elliottb/phpgraphlib",
+    "name": "atompulse/php-graph",
     "type": "library",
     "description": "PHP Graphing Library that creates graphs natively in PHP",
     "keywords": ["graph","graphs", "graphing", "gd"],
-    "homepage": "http://github.com/elliottb/phpgraphlib",
+    "homepage": "http://github.com/atompulse/php-graph",
     "license": "MIT",
     "require": {
-        "php": ">=5.0.0"
+        "php": ">=5.4.*"
     }
 }
