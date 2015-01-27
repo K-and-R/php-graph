@@ -219,6 +219,10 @@ class Graph {
             or die("Cannot Initialize new GD image stream - Check your PHP setup");
     }
 
+    /**
+     * Create graph image
+     * @return bool|string
+     */
     public function createGraph()
     {
         //main class method - called last
@@ -271,13 +275,21 @@ class Graph {
         //display errors
         $this->displayErrors();
 
-        //output to browser
-        if ($this->output_file) {
-            imagepng($this->image, $this->output_file);
-        } else {
+        // output image content
+        if (!$this->output_file) {
+            ob_start();
             imagepng($this->image);
+            $imageContent = ob_get_contents();
+            ob_end_clean();
+            imagedestroy($this->image);
+
+            return $imageContent;
+        } else {
+            $success = imagepng($this->image, $this->output_file);
+            imagedestroy($this->image);
+
+            return $success;
         }
-        imagedestroy($this->image);
     }
 
     protected function setupData()
