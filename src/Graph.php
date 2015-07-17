@@ -208,12 +208,23 @@ class Graph {
         $this->allocateColors();
     }
 
+    /**
+     * Create graph image
+     * @return void
+     * @throws Exception
+     */
     protected function initialize()
     {
-        $this->image = @imagecreate($this->width, $this->height)
-            or die("Cannot Initialize new GD image stream - Check your PHP setup");
+        $this->image = @imagecreate($this->width, $this->height);
+        if(!$this->image) {
+            throw new Exception("Cannot Initialize new GD image stream - Check your PHP setup");
+        }
     }
 
+    /**
+     * Sends HTTP headers for Graph image.
+     * @return void
+     */
     public function addHeader() {
         header("Content-type: image/png");
     }
