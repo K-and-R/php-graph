@@ -10,7 +10,7 @@ The first version Graph was written in 2007 by Elliott Brueggeman to
 deliver PHP generated graphs quickly and easily. It has grown in both features
 and maturity since its inception, but remains PHP 4.04+ compatible. Originally
 available only for paid commerial use, Graph was open-sourced in 2013
-under the MIT License. Please visit http://www.ebrueggeman.com/phpgraphlib 
+under the MIT License. Please visit http://www.ebrueggeman.com/phpgraphlib
 for more information.
 
 ---
@@ -210,13 +210,12 @@ class Graph {
 
     protected function initialize()
     {
-        //header must be sent before any html or blank space output
-        if (!$this->output_file) {
-            header("Content-type: image/png");
-        }
-
         $this->image = @imagecreate($this->width, $this->height)
             or die("Cannot Initialize new GD image stream - Check your PHP setup");
+    }
+
+    public function addHeader() {
+        header("Content-type: image/png");
     }
 
     /**
@@ -290,6 +289,20 @@ class Graph {
 
             return $success;
         }
+    }
+
+    /**
+     * Print graph to stdout; sends HTTP header
+     * @return void
+     * @throws Exception
+     */
+    public function printGraph()
+    {
+        $this->addHeader();
+        if($this->output_file) {
+            throw new Exception("printGraph() called with output_file. Did you mean to call createGraph()?");
+        }
+        print $this->createGraph();
     }
 
     protected function setupData()
