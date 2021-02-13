@@ -204,6 +204,8 @@ class Graph {
         $this->width = $width;
         $this->height = $height;
         $this->output_file = $output_file;
+        // Initialize `$this->error` as a `Countable` thingy. -- KJW
+        $this->error = [];
         $this->initialize();
         $this->allocateColors();
     }
@@ -774,11 +776,14 @@ class Graph {
         }
     }
 
-    protected function imagelinedashed(&$image_handle, $x_axis_x1, $yLocation, $x_axis_x2 , $yLocation, $color)
+    // Renamed second instance of `$yLocation` to `$yLocation2` and used it in the method body.
+    // Earlier versions of PHP would just overwrite the value in `$yLocation` with the value passed
+    // into the second parameter, so the first `$yLocation` was never really used anyway. -- KJW
+    protected function imagelinedashed(&$image_handle, $x_axis_x1, $yLocation, $x_axis_x2 , $yLocation2, $color)
     {
         $step  = 3;
         for ($i = $x_axis_x1; $i < $x_axis_x2 -1; $i += ($step*2)) {
-            imageline($this->image, $i, $yLocation,  $i + $step - 1, $yLocation, $color);
+            imageline($this->image, $i, $yLocation2,  $i + $step - 1, $yLocation2, $color);
         }
     }
 
